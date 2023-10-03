@@ -4,6 +4,12 @@
     "target": "ES6",
     "module": "commonjs",
     "outDir": "./build",
+     "paths": {
+      "@printf83/ts-tag":["./node_modules/@printf83/ts-tag/build/types/index.d.ts"],
+      "@printf83/ts-tag/*":["./node_modules/@printf83/ts-tag/*"],
+      "@printf83/ts-html":["./node_modules/@printf83/ts-html/build/types/index.d.ts"],
+      "@printf83/ts-html/*":["./node_modules/@printf83/ts-html/*"],
+    },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

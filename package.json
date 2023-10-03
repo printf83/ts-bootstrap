@@ -29,13 +29,15 @@
 	"devDependencies": {
 		"@types/bootstrap": "^5.2.7",
 		"@types/node": "^20.6.3",
-		"typescript": "^5.2.2"
+		"typescript": "^5.2.2",
+		"@printf83/ts-tag":"^0.0.1",
+		"@printf83/ts-html":"^0.0.1"
 	},
 	"dependencies": {
 		"bootstrap": "^5.3.2"
 	},
 	"scripts": {
-		"link": "npm link",
+		"link": "npm link @printf83/ts-html && npm link @printf83/ts-tag",
 		"clean": "node scripts/clean.cjs",
 		"compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
 		"debug": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json -w",

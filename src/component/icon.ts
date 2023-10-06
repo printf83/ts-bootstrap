@@ -1,11 +1,10 @@
-import { bsConstArg } from "../core/bootstrap.js";
-import { IAttr, IElem } from "../core/tag.js";
-import { mergeObject } from "../core/mergeObject.js";
-import { i } from "../html/i.js";
+import { bsConstArg } from "../util.js";
+import { I, core } from "@printf83/ts-tag";
+import { i } from "@printf83/ts-html";
 
 type IAttrIconType = "bi";
 
-export interface Icon extends IAttr {
+export interface Icon extends I.attr {
 	id?: string;
 	type?: IAttrIconType;
 	handleBubble?: boolean;
@@ -50,7 +49,7 @@ const convert = (attr: Icon) => {
 	attr.type ??= "bi";
 
 	if (attr.type === "bi") {
-		attr = mergeObject(
+		attr = core.mergeObject(
 			{
 				class: ["bi", attr.id ? `bi-${attr.id}` : undefined],
 			},
@@ -59,7 +58,7 @@ const convert = (attr: Icon) => {
 	}
 
 	if (attr.handleBubble) {
-		attr = mergeObject({ on: { click: bubbleEvent } }, attr);
+		attr = core.mergeObject({ on: { click: bubbleEvent } }, attr);
 	}
 
 	delete attr.id;
@@ -73,7 +72,7 @@ const genStaticIcon = (t: IAttrIconType, i: string, a?: Icon) => {
 	if (a) {
 		delete a.type;
 		delete a.id;
-		return new icon(mergeObject({ type: t, id: i }, a));
+		return new icon(core.mergeObject({ type: t, id: i }, a));
 	} else {
 		return new icon({ type: t, id: i });
 	}
@@ -82,8 +81,8 @@ const genStaticIcon = (t: IAttrIconType, i: string, a?: Icon) => {
 export class icon extends i {
 	constructor();
 	constructor(attr: Icon);
-	constructor(elem: IElem);
-	constructor(attr: Icon, elem: IElem);
+	constructor(elem: I.elem | I.elem[]);
+	constructor(attr: Icon, elem: I.elem | I.elem[]);
 	constructor(...arg: any[]) {
 		super(convert(bsConstArg("elem", arg)));
 	}

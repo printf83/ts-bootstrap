@@ -1,25 +1,27 @@
-import { IAttr } from "../core/tag.js";
-import { bsConsNoElemArg } from "../core/bootstrap.js";
-import { div } from "../html/div.js";
-import { replaceWith } from "../core/builder.js";
-import { Ul, ul } from "../html/ul.js";
-import { li } from "../html/li.js";
-import * as modal from "../bootstrap/modal/_index.js";
-import * as inputgroup from "../bootstrap/inputgroup/_index.js";
-import { button } from "../bootstrap/button.js";
-import { icon } from "../bootstrap/icon.js";
-import { a } from "../html/a.js";
-import { option } from "../html/option.js";
-import { select } from "../bootstrap/select.js";
-import { input } from "../bootstrap/input.js";
-import { mergeObject } from "../core/mergeObject.js";
+import { I as html, ul, li, div, option, a } from "@printf83/ts-html";
+import { bsConsNoElemArg } from "../util.js";
+import { I, core } from "@printf83/ts-tag";
+
+// import { div } from "../html/div.js";
+// import { replaceWith } from "../core/builder.js";
+// import { Ul, ul } from "../html/ul.js";
+// import { li } from "../html/li.js";
+// import * as modal from "../bootstrap/modal/_index.js";
+// import * as inputgroup from "../bootstrap/inputgroup/_index.js";
+// import { button } from "../bootstrap/button.js";
+// import { icon } from "../bootstrap/icon.js";
+// import { a } from "../html/a.js";
+// import { option } from "../html/option.js";
+// import { select } from "../bootstrap/select.js";
+// import { input } from "../bootstrap/input.js";
+// import { mergeObject } from "../core/mergeObject.js";
 
 const copyDate = (d: Date) => {
 	return new Date(d.getTime());
 };
 
 /* item */
-interface Item extends Ul {
+interface Item extends html.ul {
 	multiple?: boolean;
 	view?: Date;
 	startDate?: Date;
@@ -199,7 +201,7 @@ const convertItem = (attr: Item) => {
 
 	attr.elem = days;
 
-	attr = mergeObject(
+	attr = core.mergeObject(
 		{
 			unstyle: true,
 			display: "grid",
@@ -224,13 +226,13 @@ class item extends ul {
 	constructor();
 	constructor(attr: Item);
 	constructor(...arg: any[]) {
-		super(bsConsNoElemArg(convertItem, arg));
+		super(core.tagConstructorNoElement(convertItem, arg));
 	}
 }
 
 /* header */
 
-interface Header extends IAttr {
+interface Header extends I.attr {
 	view?: Date;
 	monthTitle?: string[];
 }
@@ -363,7 +365,7 @@ const convertHeader = (attr: Header) => {
 		];
 	}
 
-	attr = mergeObject(
+	attr = core.mergeObject(
 		{
 			class: "calendar-header",
 			display: "flex",
@@ -389,7 +391,7 @@ class header extends div {
 }
 
 /* main */
-export interface Calendar extends IAttr {
+export interface Calendar extends I.attr {
 	multiple?: boolean;
 	view?: Date;
 	startDate?: Date;
@@ -416,7 +418,7 @@ const convert = (attr: Calendar) => {
 		data.startDate = result.startDate;
 		data.endDate = result.endDate;
 
-		replaceWith(
+		core.replaceWith(
 			itemContainer,
 			new item({
 				view: data.view,
@@ -445,7 +447,7 @@ const convert = (attr: Calendar) => {
 		const itemContainer = headerContainer.nextElementSibling as Element;
 		data.view = (e as CustomEvent).detail;
 
-		replaceWith(
+		core.replaceWith(
 			headerContainer,
 			new header({
 				view: data.view,
@@ -456,7 +458,7 @@ const convert = (attr: Calendar) => {
 			})
 		);
 
-		replaceWith(
+		core.replaceWith(
 			itemContainer,
 			new item({
 				view: data.view,
@@ -491,7 +493,7 @@ const convert = (attr: Calendar) => {
 		}),
 	];
 
-	attr = mergeObject(
+	attr = core.mergeObject(
 		{
 			class: "calendar",
 		},

@@ -1,13 +1,11 @@
-import { bootstrapType, bsConstArg, bsConstArgTag } from "../core/bootstrap.js";
-import { IElem, tag } from "../core/tag.js";
-import { mergeObject } from "../core/mergeObject.js";
-import { Button as TButton } from "../html/button.js";
-import { addEvent } from "../core/eventManager.js";
-import { bstsConsole as console } from "../core/console.js";
-import { Button as BSButton } from "bootstrap";
+import { I as html } from "@printf83/ts-html";
+import { Button as BButton } from "bootstrap";
+import { bsType } from "../interface/bsType.js";
+import { bsConstArg, bsConstArgTag } from "../util.js";
+import { I, core } from "@printf83/ts-tag";
 
-export interface Button extends Omit<TButton, "role"> {
-	color?: bootstrapType.btnColor;
+export interface Button extends Omit<html.button, "role"> {
+	color?: bsType.btnColor;
 	outline?: boolean;
 	dismiss?: "modal" | "alert" | "offcanvas" | "toast";
 	weight?: "lg" | "sm";
@@ -34,7 +32,7 @@ const convert = (attr: Button) => {
 
 	//add btn class
 	//weight,role,toggle
-	attr = mergeObject(
+	attr = core.mergeObject(
 		{
 			class: [
 				attr.color ? "btn" : undefined,
@@ -80,11 +78,11 @@ const convert = (attr: Button) => {
 	return attr;
 };
 
-export class button extends tag {
+export class button extends I.tag {
 	constructor();
 	constructor(attr: Button);
-	constructor(elem: IElem);
-	constructor(attr: Button, elem: IElem);
+	constructor(elem: I.elem | I.elem[]);
+	constructor(attr: Button, elem: I.elem | I.elem[]);
 	constructor(...arg: any[]) {
 		super(
 			bsConstArgTag<Button>("elem", "button", "a", (i) => (i.href ? true : false), arg),
@@ -96,10 +94,10 @@ export class button extends tag {
 		return button.getOrCreateInstance(elem);
 	};
 	static getInstance = (elem: Element | string) => {
-		return BSButton.getInstance(elem);
+		return BButton.getInstance(elem);
 	};
 	static getOrCreateInstance = (elem: Element | string) => {
-		addEvent("destroy", elem, (i) => {
+		core.addEvent("destroy", elem, (i) => {
 			const target = i.target as Element;
 
 			const m = button.getInstance(target);
@@ -110,7 +108,7 @@ export class button extends tag {
 		});
 
 		console.info(`Initialize bootstrap button to $1`, elem);
-		return BSButton.getOrCreateInstance(elem);
+		return BButton.getOrCreateInstance(elem);
 	};
 	static toggle = (elem: Element | string) => {
 		button.getOrCreateInstance(elem)?.toggle();

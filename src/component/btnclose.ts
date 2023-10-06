@@ -1,9 +1,9 @@
+import { core } from "@printf83/ts-tag";
+import { I, button } from "@printf83/ts-html";
 import { bsConsNoElemArg } from "../util.js";
-import { mergeClass } from "@printf83/ts-tag";
-import { button } from "@printf83/ts-html";
-import { Button } from "@printf83/ts-html/build/types/component/button.js";
 
-export interface Btnclose extends Button {
+export interface Btnclose extends I.button {
+	label?: string;
 	white?: boolean;
 }
 
@@ -14,7 +14,7 @@ const convert = (attr: Btnclose) => {
 
 	//add btn-close class
 	//white
-	attr.class = mergeClass(attr.class, ["btn-close", attr.white ? "btn-close-white" : undefined]);
+	attr.class = core.mergeClass(attr.class, ["btn-close", attr.white ? "btn-close-white" : undefined]);
 
 	delete attr.white;
 

@@ -1,14 +1,14 @@
 import { I, core } from "@printf83/ts-tag";
 
-export const bsConsNoElemArg = <T extends I.attr>(fn: <T extends I.attr>(attr: T) => I.attr, arg?: any[]) => {
+export const bsConsNoElemArg = <T extends I.attr>(arg?: any[]) => {
 	if (arg) {
 		if (arg.length === 1) {
-			return fn(arg[0] as T);
+			return arg[0] as T;
 		} else {
-			return fn({});
+			return {} as T;
 		}
 	} else {
-		return fn({});
+		return {} as T;
 	}
 };
 

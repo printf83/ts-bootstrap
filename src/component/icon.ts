@@ -1,10 +1,10 @@
 import { bsConstArg } from "../util.js";
-import { I, core } from "@printf83/ts-tag";
+import { I as ITag, core } from "@printf83/ts-tag";
 import { i } from "@printf83/ts-html";
 
 type IAttrIconType = "bi";
 
-export interface Icon extends I.attr {
+export interface Icon extends ITag.attr {
 	id?: string;
 	type?: IAttrIconType;
 	handleBubble?: boolean;
@@ -81,8 +81,8 @@ const genStaticIcon = (t: IAttrIconType, i: string, a?: Icon) => {
 export class icon extends i {
 	constructor();
 	constructor(attr: Icon);
-	constructor(elem: I.elem | I.elem[]);
-	constructor(attr: Icon, elem: I.elem | I.elem[]);
+	constructor(elem: ITag.elem | ITag.elem[]);
+	constructor(attr: Icon, elem: ITag.elem | ITag.elem[]);
 	constructor(...arg: any[]) {
 		super(convert(bsConstArg("elem", arg)));
 	}

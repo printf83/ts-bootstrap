@@ -1,13 +1,17 @@
-import { bootstrapType, bsConstArg } from "../core/bootstrap.js";
-import { mergeObject } from "../core/mergeObject.js";
-import { IAttr, IElem, isAttr, tag } from "../core/tag.js";
-import { div } from "../html/div.js";
-import { span } from "../html/span.js";
+// import { bootstrapType, bsConstArg } from "../core/bootstrap.js";
+// import { mergeObject } from "../core/mergeObject.js";
+// import { IAttr, IElem, isAttr, tag } from "../core/tag.js";
+// import { div } from "../html/div.js";
+// import { span } from "../html/span.js";
+// import { Icon, icon } from "./icon.js";
+
+import { I as ITag, core } from "@printf83/ts-tag";
+import { bsType } from "../interface/bsType.js";
 import { Icon, icon } from "./icon.js";
 
-export type CaptionDisplay = bootstrapType.display | bootstrapType.display[];
+export type CaptionDisplay = bsType.display | bsType.display[];
 
-export interface Caption extends IAttr {
+export interface Caption extends ITag.attr {
 	icon?: string | Icon | icon;
 	iconPosition?: "start" | "end" | "top" | "bottom";
 	iconDisplay?: CaptionDisplay;
@@ -17,18 +21,18 @@ export interface Caption extends IAttr {
 const fnIcon = (display: CaptionDisplay | undefined, attr: string | Icon | icon) => {
 	if (typeof attr === "string") {
 		return new icon({ id: attr, display: display });
-	} else if (isAttr<Icon>(attr)) {
-		return new icon(mergeObject(attr, { display: display }));
+	} else if (core.isAttr<Icon>(attr)) {
+		return new icon(core.mergeObject(attr, { display: display }));
 	} else {
 		return attr;
 	}
 };
 
-const fnElem = (display: CaptionDisplay | undefined, elem: IElem) => {
+const fnElem = (display: CaptionDisplay | undefined, elem: ITag.elem | ITag.elem[]) => {
 	if (display) {
 		return new span({ display: display }, elem);
 	} else {
-		return elem as tag;
+		return elem as core.tag;
 	}
 };
 

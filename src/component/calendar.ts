@@ -1,6 +1,6 @@
 import { I as html, ul, li, div, option, a } from "@printf83/ts-html";
 import { bsConsNoElemArg } from "../util.js";
-import { I, core } from "@printf83/ts-tag";
+import { I as ITag, core } from "@printf83/ts-tag";
 
 // import { div } from "../html/div.js";
 // import { replaceWith } from "../core/builder.js";
@@ -232,7 +232,7 @@ class item extends ul {
 
 /* header */
 
-interface Header extends I.attr {
+interface Header extends ITag.attr {
 	view?: Date;
 	monthTitle?: string[];
 }
@@ -391,7 +391,7 @@ class header extends div {
 }
 
 /* main */
-export interface Calendar extends I.attr {
+export interface Calendar extends ITag.attr {
 	multiple?: boolean;
 	view?: Date;
 	startDate?: Date;

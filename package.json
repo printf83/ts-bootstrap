@@ -27,13 +27,13 @@
 		}
 	},
 	"devDependencies": {
-		"@printf83/ts-html": "^0.0.3",
 		"@types/bootstrap": "^5.2.7",
 		"@types/node": "^20.6.3",
 		"typescript": "^5.2.2"
 	},
 	"dependencies": {
-		"@printf83/ts-html": "^0.0.3",
+		"@printf83/ts-tag": "^0.0.5",
+		"@printf83/ts-html": "^0.0.5",
 		"bootstrap": "^5.3.2"
 	},
 	"scripts": {
